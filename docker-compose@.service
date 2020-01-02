@@ -1,0 +1,31 @@
+[Unit]
+Description=docker-compose %i service
+Requires=docker.service network-online.target
+After=docker.service network-online.target
+
+[Service]
+Type=simple
+TimeoutStartSec=300
+Restart=always
+WorkingDirectory=/etc/docker-compose/%i
+
+# Update images
+ExecStartPre=/usr/bin/docker-compose pull --quiet --ignore-pull-failures
+# Build images
+ExecStartPre=/usr/bin/docker-compose build --pull
+
+# Compose up
+ExecStart=/usr/bin/docker-compose up
+
+# Compose down
+ExecStop=/usr/bin/docker-compose down --remove-orphans
+# Remove (old) container images and volumes
+ExecStop=/usr/bin/docker-compose rm -f
+
+# Update images
+ExecReload=/usr/bin/docker-compose pull --quiet --ignore-pull-failures
+# Build images
+ExecReload=/usr/bin/docker-compose build --pull
+
+[Install]
+WantedBy=multi-user.target

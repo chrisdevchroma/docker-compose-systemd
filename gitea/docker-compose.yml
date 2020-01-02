@@ -1,0 +1,13 @@
+version: "3"
+services:
+  gitea:
+    container_name: gitea
+    image: kunde21/gitea-arm
+    #image: mephistoxol/gitea #alternative
+    #image: gitea/gitea #no armv7 support https://github.com/go-gitea/gitea/issues/6700
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+      - "2222:22"
+    volumes:
+      - /path/to/gitea/data:/data
