@@ -1,0 +1,21 @@
+---
+version: "3"
+services:
+  plex:
+    container_name: plex
+    image: linuxserver/plex
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      - PUID=1000 # change to user with media read access
+      - PGID=1000 # change to group with media read access
+      - VERSION=docker
+      #- VERSION=latest
+      - UMASK_SET=022 # optional
+      #- PLEX_CLAIM= # optional
+    volumes:
+      - </path/to/library>:/config
+      - <path/to/tvseries>:/tv
+      - </path/to/movies>:/movies
+    #devices: # Hardware acceleration
+      #- "/dev/dri:/dev/dri" # Intel Quicksync
