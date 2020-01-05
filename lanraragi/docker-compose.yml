@@ -1,0 +1,18 @@
+
+---
+version: "3"
+services:
+  lanraragi:
+    container_name: lanraragi
+    image: difegue/lanraragi
+    restart: unless-stopped
+    ports:
+      - "3000:3000" # Default
+      #- "8000:8000" # Alternative
+      #- "3333:3333" # SSL
+    environment:
+      #- LRR_NETWORK="http://*:8000" # Alternative
+      #- LRR_NETWORK="https://*:3333?cert=/ssl/crt.crt&key=/ssl/crt.key" # HTTPS
+    volumes:
+      #- </path/to/ssl/keys>:/ssl # HTTPS
+      - </path/to/content>:/home/koyomi/lanraragi/content

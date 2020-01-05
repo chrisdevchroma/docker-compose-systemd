@@ -12,3 +12,7 @@ The dockerd daemon should start fine after switching to iptables-legacy.
 ```
 sudo systemctl start docker
 ```
+
+## lanraragi and gitea
+The lanraragi and gitea container both use port 3000 by default.
+For lanraragi a alternative port can be easily configured (with or without SSL, see the docker-compose.yml file).
