@@ -1,0 +1,33 @@
+--- 
+version: "3"
+networks: 
+  firefly_iii_net: 
+    driver: bridge
+services: 
+  firefly_iii_app: 
+    image: jc5x/firefly-iii:latest
+    depends_on:
+      - firefly_iii_db
+    networks: 
+      - firefly_iii_net
+    ports: 
+      - "80:80"
+    environment:
+      - APP_KEY=<CHANGEME_32_CHARS> #use 'php artisan key:generate'
+      - DB_HOST=firefly_iii_db
+      - DB_PORT=5432
+      - DB_DATABASE=firefly
+      - DB_USERNAME=firefly
+      - DB_PASSWORD=<firefly_db_password>
+    volumes: 
+      - </path/to/firefly/data/export>:/var/www/firefly-iii/storage/export
+      - </path/to/firefly/data/upload>:/var/www/firefly-iii/storage/upload
+  firefly_iii_db: 
+    image: "postgres:10"
+    environment:
+      - POSTGRES_PASSWORD=<firefly_db_password>
+      - POSTGRES_USER=firefly
+    networks: 
+      - firefly_iii_net
+    volumes: 
+      - </path/to/firefly/data/db>:/var/lib/postgresql/data

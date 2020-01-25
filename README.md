@@ -22,6 +22,7 @@ echo '0  4    * * *   root    /bin/systemctl reload docker-compose@*.service' >>
 Uncomment '--no-pull' in watchtower/docker-compose.yml (and remove the line in crontab)
 
 ## Included services (with armv7 & armv8/64 support)
+* firefly-iii
 * gitea
 * lanraragi
 * plex
