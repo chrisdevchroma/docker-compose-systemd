@@ -13,7 +13,7 @@
 * (Optional) Start the service on boot with `systemctl enable docker-compose@\<servicename\>`
 
 ## Update images with cron
-Run the following line (or run the cron_update_images.sh script as root/sudo)
+Execute the following line as root:
 ```
 echo '0  4    * * *   root    /bin/systemctl reload docker-compose@*.service' >> /etc/crontab
 ```
